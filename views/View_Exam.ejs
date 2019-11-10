@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> :3 </title>
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+        #users
+        {
+            margin-top: 1%;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var xmlhttp = new XMLHttpRequest();
+    var exam_id;
+    function SaveAnswer(name, value) {
+        xmlhttp.open("POST","save_answer",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        switch(name) {
+            case "1":
+                xmlhttp.send("answer1="+value);
+                break;
+            case "2":
+                xmlhttp.send("answer2="+value);
+                break;
+            case "3":
+                xmlhttp.send("answer3="+value);
+                break;
+            case "4":
+                xmlhttp.send("answer4="+value);
+                break;
+            case "5":
+                xmlhttp.send("answer5="+value);
+                break;
+        }
+    }
+    function MarkQuestion(name, value) {
+        xmlhttp.open("POST","mark_question",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        switch(name) {
+            case "1":
+                xmlhttp.send("marked1="+value);
+                break;
+            case "2":
+                xmlhttp.send("marked2="+value);
+                break;
+            case "3":
+                xmlhttp.send("marked3="+value);
+                break;
+            case "4":
+                xmlhttp.send("marked4="+value);
+                break;
+            case "5":
+                xmlhttp.send("marked5="+value);
+                break;
+        }
+    }
+    function submit_exam()
+    {
+        async: false
+        xmlhttp.open("POST","submit_exam",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("exam_id="+exam_id);
+        xmlhttp.onreadystatechange = function () {
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                var string = xmlhttp.responseText.split(" ");
+                var solved = string[0];
+                var marked = string[1];
+                var skipped = string[2];
+                var score = string[3];
+                alert("Your exam is submitted successfully!\nSolved: "+solved+"\nMarked: "+marked+"\nSkipped: "+skipped
+                    +"\nYour score: "+ score+"   out of 5.");
+            }
+        }
+    }
+    function timeout(){
+        async: false
+        xmlhttp.open("POST","submit_exam",true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("exam_id="+exam_id);
+        xmlhttp.onreadystatechange = function ()
+        {
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                var string = xmlhttp.responseText.split(" ");
+                var solved = string[0];
+                var marked = string[1];
+                var skipped = string[2];
+                var score = string[3];
+                alert("Time Out!\nSolved: "+solved+"\nMarked: "+marked+"\nSkipped: "+skipped+"\nYour score: "+ score+"   out of 5.");
+            }
+        }
+        var f = document.createElement('form');
+        f.action='view_exams';
+        f.method='POST';
+        document.body.appendChild(f);
+        f.submit();
+    }
+    function load(id){
+        exam_id = id;
+        var myInt = setInterval(function () {
+            timeout();
+        }, 15000);
+        myInt;
+    }
+    window.onload = load('<%= exam.id %>');
+
+</script>
+<form  method="post" action="view_exams">
+
+
+    <input type="checkbox" name="question1check" value="question1check" onclick="MarkQuestion('1', 'true')">
+    <%= exam.questions[0].content%> <br>
+    <% var written = false;%>
+    <% var random_number = Math.floor(Math.random() * 4);%>
+    <% for (var i = 0;i < exam.questions[0].wrong_answers.length; i++){ %>
+        <% if(random_number == i){%>
+            <input name="question1" type="radio" value='<%= exam.questions[0].correct_answer %>' onclick="SaveAnswer('1', this.value)">
+            <%=exam.questions[0].correct_answer%> <br>
+            <%written=true;%>
+        <%}%>
+        <% if(exam.questions[0].wrong_answers[i][1]==true){%>
+            <input name="question1" type="radio" value='<%= exam.questions[0].wrong_answers[i][0] %>' onclick="SaveAnswer('1', this.value)">
+            <%=exam.questions[0].wrong_answers[i][0]%> <br>
+        <%}%>
+    <% }%>
+    <%if (written == false){%>
+    <input type="radio" name="question1" value='<%=exam.questions[0].correct_answer%>' onclick="SaveAnswer('1', this.value)">
+    <%=exam.questions[0].correct_answer%> <br>
+    <%}%>
+    <br>
+
+    <input type="checkbox" name="question2check" value="question2check" onclick="MarkQuestion('2', 'true')">
+    <%= exam.questions[1].content%><br>
+    <% written = false;%>
+    <% random_number = Math.floor(Math.random() * 4);%>
+    <% for (var i = 0;i < exam.questions[1].wrong_answers.length; i++){ %>
+        <% if(random_number == i){%>
+            <input type="radio" name="question2" value='<%= exam.questions[1].correct_answer%>' onclick="SaveAnswer('2', this.value)">
+            <%=exam.questions[1].correct_answer%> <br>
+            <%written=true;%>
+        <%}%>
+        <% if(exam.questions[1].wrong_answers[i][1]==true){%>
+        <input type="radio" name="question2" value='<%=exam.questions[1].wrong_answers[i][0]%>' onclick="SaveAnswer('2', this.value)">
+        <%=exam.questions[1].wrong_answers[i][0]%> <br>
+        <%}%>
+    <% }%>
+    <%if (written == false){%>
+    <input type="radio" name="question2" value='<%=exam.questions[1].correct_answer%>' onclick="SaveAnswer('2', this.value)">
+    <%=exam.questions[1].correct_answer%> <br>
+    <%}%>
+    <br>
+
+    <input type="checkbox" name="question3check" value="question3check" onclick="MarkQuestion('3', 'true')">
+    <%= exam.questions[2].content%><br>
+    <% written = false;%>
+    <% random_number = Math.floor(Math.random() * 4);%>
+    <% for (var i = 0;i < exam.questions[2].wrong_answers.length; i++){ %>
+        <% if(random_number == i){%>
+        <input type="radio" name="question3" value='<%=exam.questions[2].correct_answer%>' onclick="SaveAnswer('3', this.value)">
+        <%=exam.questions[2].correct_answer%> <br>
+        <%written=true;%>
+        <%}%>
+        <% if(exam.questions[2].wrong_answers[i][1]==true){%>
+        <input type="radio" name="question3" value='<%=exam.questions[2].wrong_answers[i][0]%>' onclick="SaveAnswer('3', this.value)">
+        <%=exam.questions[2].wrong_answers[i][0]%> <br>
+        <%}%>
+    <% }%>
+    <%if (written == false){%>
+    <input type="radio" name="question3" value='<%=exam.questions[2].correct_answer%>' onclick="SaveAnswer('3', this.value)">
+    <%=exam.questions[2].correct_answer%> <br>
+    <%}%>
+    <br>
+
+    <input type="checkbox" name="question4check" value="question4check" onclick="MarkQuestion('4', 'true')">
+    <%= exam.questions[3].content%><br>
+    <% written = false;%>
+    <% random_number = Math.floor(Math.random() * 4);%>
+    <% for (var i = 0;i < exam.questions[3].wrong_answers.length; i++){ %>
+        <% if(random_number == i){%>
+        <input type="radio" name="question4" value='<%=exam.questions[3].correct_answer%>' onclick="SaveAnswer('4', this.value)">
+        <%=exam.questions[3].correct_answer%> <br>
+        <%written=true;%>
+        <%}%>
+        <% if(exam.questions[3].wrong_answers[i][1]==true){%>
+        <input type="radio" name="question4" value='<%=exam.questions[3].wrong_answers[i][0]%>' onclick="SaveAnswer('4', this.value)">
+        <%=exam.questions[3].wrong_answers[i][0]%> <br>
+        <%}%>
+    <% }%>
+    <%if (written == false){%>
+    <input type="radio" name="question4" value='<%=exam.questions[3].correct_answer%>' onclick="SaveAnswer('4', this.value)">
+    <%=exam.questions[3].correct_answer%> <br>
+    <%}%>
+    <br>
+
+    <input type="checkbox" name="question5check" value="question5check" onclick="MarkQuestion('5', 'true')">
+    <%= exam.questions[4].content%><br>
+    <% written = false;%>
+    <% random_number = Math.floor(Math.random() * 4);%>
+    <% for (var i = 0;i < exam.questions[4].wrong_answers.length; i++){ %>
+        <% if(random_number == i){%>
+        <input type="radio" name="question5" value='<%=exam.questions[4].correct_answer%>' onclick="SaveAnswer('5', this.value)">
+        <%=exam.questions[4].correct_answer%> <br>
+        <%written=true;%>
+        <%}%>
+        <% if(exam.questions[4].wrong_answers[i][1]==true){%>
+        <input type="radio" name="question5" value='<%=exam.questions[4].wrong_answers[i][0]%>' onclick="SaveAnswer('5', this.value)">
+        <%=exam.questions[4].wrong_answers[i][0]%> <br>
+        <%}%>
+    <% }%>
+    <%if (written == false){%>
+    <input type="radio" name="question5" value='<%=exam.questions[4].correct_answer%>' onclick="SaveAnswer('5', this.value)">
+    <%=exam.questions[4].correct_answer%> <br>
+    <%}%>
+    <br>
+
+    <button class="btn btn-primary" type="submit" name = "" value="" onclick="submit_exam()">submit</button>
+</form>
+
+</body>
+</html>

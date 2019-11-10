@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+    </style>
+
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">welcome <%=userid%> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_cvs">View CVS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view_Examined">View examined users </a>
+            </li>
+        </ul>
+        <li class="nav-item active">
+            <a class="nav-link" href="/logout"> LOGOUT <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+</nav>
+<div id="users">
+    <h5>Topic : <%=EXAM.exam.type%></h5>
+    <h5>date of answer : <%=EXAM.exam.date%></h5>
+    <h5>Username : <%=EXAM.exam.user_id%></h5>
+    <h5>Score : <%=EXAM.exam.score%></h5>
+    <table class="table table-borderless table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>Question</th>
+            <th>correst answer</th>
+            <th>Answer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (var i = 0; i < EXAM.exam.questions.length; i++) { %>
+            <tr>
+                <td ><%= i+1%></td>
+                <td><%= EXAM.exam.questions[i].content %> </td>
+                <td><%= EXAM.exam.questions[i].correct_answer %>  </td>
+                <td><%= EXAM.answers[i]%></td>
+            </tr>
+        <% } %>
+    </table>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+    <table id="tab">
+
+
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

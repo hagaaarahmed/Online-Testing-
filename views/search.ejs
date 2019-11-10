@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+    </style>
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">welcome <%=userid%> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_cvs">View CVS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view_Examined">View examined users </a>
+            </li>
+        </ul>
+        <li class="nav-item active">
+            <a class="nav-link" href="/logout"> LOGOUT <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+</nav>
+<div id="users">
+
+    <table class="table table-borderless table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th >ID</th>
+            <th >type</th>
+            <th >Date</th>
+            <th >UserID</th>
+            <th >Solved</th>
+            <th>Questions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (var i = 0; i < EXAM.length; i++) { %>
+            <tr>
+                <td ><%= i+1%></td>
+                <td><%= EXAM[i].id %> </td>
+                <td><%= EXAM[i].type %>  </td>
+                <td><%= EXAM[i].date%></td>
+                <td><%= EXAM[i].user_id%></td>
+                <td><%= EXAM[i].solved%></td>
+                <td>  <% for (var j = 0; j < EXAM[i].questions.length; j++) { %>
+                    <%= EXAM[i].questions[j].content%>,
+                    <% } %></td>
+            </tr>
+        <% } %>
+    </table>
+    </tbody>
+    </table>
+    <table id="tab">
+
+
+</div>
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

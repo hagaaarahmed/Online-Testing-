@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html >
+<head>
+   <!--<meta charset="UTF-8">-->
+    <title>Title</title>
+
+    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+        #users
+        {
+            margin-top: 1%;
+        }
+    </style>
+
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">welcome <%=userid%> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">View CVS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view_Examined">View examined users </a>
+            </li>
+        </ul>
+        <li class="nav-item active">
+            <a class="nav-link" href="/logout"> LOGOUT <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+</nav>
+<div id="users" style="height: 400px">
+<table class="table table-borderless table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th>Username</th>
+        <th>CV link</th>
+        <th>Open cv</th>
+        <th>Accept User</th>
+        <th>Reject User</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (var i = 0; i < user.length; i+=2) { %>
+        <tr>
+            <td ><%= (i/2)+1%></td>
+            <td name="username"><%= user[i] %> </td>
+            <td><%= user[i+1] %>  </td>
+            <form method="post" action="/View_cv">
+                <input name="username" style="display: none" value="<%=user[i]%>" type="text">
+                <td><button class="btn btn-primary"> open cv </button></td></form>
+            <form method="post" action="/Accept_user">
+                <input name="username1" style="display: none" value="<%=user[i]%>" type="text">
+             <td>  <input name="topics"  placeholder="topics" type="text">
+                <input name="numofexams"  placeholder="Number of Exams" type="text">
+                <button class="btn btn-primary">Accept user</button></td></form>
+            <form method="post" action="/Reject_user">
+                <input name="username2" style="display: none" value="<%=user[i]%>" type="text">
+                <td><button class="btn btn-primary">Reject User</button></td></form>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+</div>
+
+<div id="search">
+    <form method="post" action="/search">
+    <div id="search_by" class="col-lg-5">
+        <h4>SEARCH ABOUT EXAM BY :</h4>
+       <label> by name :</label> <input type="radio" name="search_by"value="user_id"><br>
+        <label> by email :</label>  <input type="radio" name="search_by"value="email"><br>
+        <label> by exam type :</label> <input type="radio" name="search_by"value="type"><br>
+        <label> by exam date :</label> <input type="radio" name="search_by"value="date"><br>
+    </div>
+        <div class="col-lg-5">
+        <input name="value" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+    </form>
+</div>
+</body>
+
+</html>

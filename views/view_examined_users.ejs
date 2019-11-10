@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <!--<meta charset="UTF-8">-->
+    <title>Title</title>
+
+    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+        #users
+        {
+            margin-top: 1%;
+        }
+    </style>
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">welcome <%=userid%></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_cvs">View CVS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">View examined users </a>
+            </li>
+        </ul>
+        <li class="nav-item active">
+            <a class="nav-link" href="/logout"> LOGOUT <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+</nav>
+
+<table class="table table-borderless table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th>User ID:</th>
+        <th>view specific user</th>
+        <th>view summarized report</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (var i = 0; i < examined.length; i++) { %>
+        <tr>
+            <td ><%= i+1%></td>
+            <td > <%= examined[i] %> </td>
+            <td><form method="post" action="/exam">
+                    <input name="username1" style="display: none" value="<%=examined[i]%>" type="text">
+                    <button class="btn btn-primary">view specific user</button></form></td>
+            <td ><form method="post" action="/summary">
+                    <input name="username2" style="display: none" value="<%=examined[i]%>" type="text">
+                    <button class="btn btn-primary">view summarized report</button></form></td>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+
+</body>
+</html>

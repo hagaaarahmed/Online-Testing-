@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+        #users
+        {
+            margin-top: 1%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">welcome <%=userid%> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+            <a class="nav-link" href="/logout"> LOGOUT <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+</nav>
+    <form action="view_exam" method="post">
+        <table  class="table table-borderless table-dark" >
+            <tr>
+                <td><b>Exam Type</b></td>
+            </tr>
+
+            <% exams.forEach(function(exam){ %>
+                <tr>
+                    <td><i> <%= exam.type %> </i></td>
+                    <td><button class="btn btn-primary" type="submit" name="exam_id" value='<%=exam.id%>'> Solve Exam </button></td>
+                </tr>
+            <% })%>
+
+
+        </table>
+    </form>
+</body>
+</html>

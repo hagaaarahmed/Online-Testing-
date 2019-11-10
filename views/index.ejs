@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" >
+
+    <title>Home</title>
+    <style>
+        #begin
+        {
+            padding :20% 10%;
+        }
+        body
+        {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="begin">
+    <form method="get" action="/register">
+        <button type="submit" class="btn btn-primary btn-lg btn-block"  >Register</button>
+    </form>
+    <form method="get" action="/loginuser">
+    <button type="submit" class="btn btn-secondary btn-lg btn-block" >User Log in</button>
+    </form>
+    <form method="get" action="/Hrlogin">
+    <button type="submit" class="btn btn-secondary btn-lg btn-block" formaction="/Hrlogin">HR Log in</button>
+    </form>
+</div>
+<script src="bootstrap.min.js"></script>
+<script src="jquery-3.2.1.min.js"></script>
+<script src="Edit.js"></script>
+</body>
+</html>

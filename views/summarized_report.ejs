@@ -1,0 +1,71 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>User page</title>
+    <link  rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <style>
+        body
+        {
+            background-color: #212529;
+            color: white;
+        }
+        #users
+        {
+            margin-top: 1%;
+        }
+    </style>
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">welcome <%=userid%> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/view_cvs">View CVS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/view_Examined">View examined users </a>
+            </li>
+        </ul>
+               <li class="nav-item active">
+            <a class="nav-link" href="/logout"> LOGOUT <span class="sr-only">(current)</span></a>
+        </li>
+    </div>
+</nav>
+<div id="users">
+    <p>total score : <%=summary[summary.length-1]%></p>
+    <table class="table table-borderless table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th>Exam ID:</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (var i = 0; i < summary.length-1; i++) { %>
+            <tr>
+                <td ><%= i+1%></td>
+                <td > <%= summary[i].id%> </td>
+                <td><%= summary[i].score %></td>
+
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+
+</div>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+
+
+
+
+
+
