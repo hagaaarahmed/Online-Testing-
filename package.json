@@ -16,7 +16,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
-    "googleapis": "^27.0.0",
+    "googleapis": "^39.1.0",
     "http": "0.0.0",
     "http-errors": "~1.6.2",
     "loopback-component-storage-mongo": "^1.5.1",
