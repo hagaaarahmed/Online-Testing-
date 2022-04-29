@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "asyn": "0.0.1",
-    "async": "^2.6.1",
+    "async": "^2.6.4",
     "childprocess": "^2.0.2",
     "cookie-parser": "~1.4.3",
     "deasync": "^0.1.14",
